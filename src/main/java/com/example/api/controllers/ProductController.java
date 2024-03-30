@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,9 +27,12 @@ public class ProductController {
     }
     @GetMapping()
 public List<Product> getAllProducts(){
-    return new ArrayList<Product>();
+    return productService.getAllProducts();
 }
-
+    @PutMapping("/{id}")
+    public Product replaceProduct(@PathVariable("id") Long id,@RequestBody Product product){
+        return productService.replaceProduct(id, product);
+    }
 
 
 }
