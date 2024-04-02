@@ -11,6 +11,7 @@ import org.springframework.web.client.RequestCallback;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.api.dtos.FakeStoreProductDto;
+import com.example.api.exceptions.ProductNotFound;
 import com.example.api.models.Category;
 import com.example.api.models.Product;
 
@@ -36,12 +37,13 @@ public class FakeStoreService implements ProductService {
     }
 
     @Override
-    public Product getProductById(Long id) {
+    public Product getProductById(Long id) throws ProductNotFound {
         FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject("https://fakestoreapi.com/products/" + id,
                 FakeStoreProductDto.class);
         if (fakeStoreProductDto == null) {
-            return null;
+            throw new ProductNotFound(id,"Product not found");
         }
+        
         return ConvertFakeStoreDtoToProduct(fakeStoreProductDto);
     }
 
