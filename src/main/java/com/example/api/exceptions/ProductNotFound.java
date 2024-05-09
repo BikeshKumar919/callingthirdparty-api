@@ -11,5 +11,8 @@ public class ProductNotFound extends Exception {
     public ProductNotFound(long id,String message) {
         super(message);
         this.id = id;
+        this.message=message;
     }
+
+
 }

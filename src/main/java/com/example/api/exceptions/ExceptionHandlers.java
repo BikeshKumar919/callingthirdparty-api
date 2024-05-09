@@ -12,6 +12,8 @@ public class ExceptionHandlers {
     public ResponseEntity<Void> handleArthematicException(){
         ResponseEntity<Void> responseEntity = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         return responseEntity;
+        //ResponseEntity represents the entire HTTP response, including both the body and the status code.
+        //you can use it to return any type of object along with additional HTTP information such as status code, headers, etc. It is a powerful way to control your REST API's responses precisely.
     }
     @ExceptionHandler(ProductNotFound.class)
     public ResponseEntity<ExceptionDto> handleProductNotFound(ProductNotFound e){
